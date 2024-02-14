@@ -44,9 +44,10 @@ f. Starting Services and Gateway: Start each service (Google Calendar and Google
     CLIENT_SECRET=<your-client-secret>
     REDIRECT_URL=<your-redirect-url>
     PORT=<port-number>
-    
-    ```
+
     Replace <your-client-id>, <your-client-secret>, <your-redirect-url>, and <port-number> with your actual Google OAuth2 client ID, client secret, redirect URL, and the desired port number, respectively.
+    ```
+    
 
 5. Compile TypeScript files:
 
