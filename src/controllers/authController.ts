@@ -1,12 +1,13 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { generateAuthUrl } from '../utils/googleAuth';
 import { google } from 'googleapis';
+import dotenv from 'dotenv';
 
-const oauth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.SECRET_ID,process.env.REDIRECT);
-const calendar = google.calendar({ version: "v3", auth: oauth2Client });
-const people = google.people({ version: "v1", auth: oauth2Client });
+dotenv.config();
+console.log("Proces    : "+process.env.CLIENT_ID)
 
 
+export const oauth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET,process.env.REDIRECT_URL);
 
 export const login = async (req: FastifyRequest, res: FastifyReply): Promise<void> => {
     try {
@@ -29,9 +30,6 @@ export const callback = async (req: any, res: any): Promise<void> => {
     // }
 
 
-
-
-
     console.log("Inside of fastify get -> /callback");
 
     const code = req.query.code;
@@ -41,9 +39,10 @@ export const callback = async (req: any, res: any): Promise<void> => {
     try {
         const { tokens } = await oauth2Client.getToken(code);
         oauth2Client.setCredentials(tokens);
-        res.send({
-            msg: "Successfully Log in ",
-        });
+        // res.send({
+        //     msg: "Successfully Log in ",
+        // });
+        res.redirect("http://localhost:4000/graphiql");
     } catch (error) {
         console.error("Error getting tokens:", error);
         res.status(500).send({ error: "Failed to authenticate user" });

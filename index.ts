@@ -6,7 +6,7 @@ import mercurius from 'mercurius';
 import {typeDefs} from './src/graphql/schema';
 import {resolvers} from './src/graphql/resolvers';
 import { GraphQLSchema } from 'graphql'; // Import the GraphQLSchema type
-import { makeExecutableSchema as makeExecutableSchemaFromTools} from 'graphql-tools'; // Import makeExecutableSchema function
+import { makeExecutableSchema as makeExecutableSchemaFromTools} from '@graphql-tools/schema'; // Import makeExecutableSchema function
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ app.register(mercurius, {
   });
 
 // Start server
-app.listen({port:4000}, (err) => {
+app.listen({port:process.env.PORT ? parseInt(process.env.PORT) : 3000}, (err) => {
   if (err) {
     app.log.error(err);
     process.exit(1);
