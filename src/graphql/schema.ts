@@ -27,4 +27,8 @@ export const typeDefs = `
     events: [Event!]!
     contacts: [Contact!]!
   }
+
+  type Mutation {
+    addEvent(summary: String!, start: String!, end: String!): Event!
+  }
 `;

@@ -58,5 +58,46 @@ export const resolvers = {
       }
     },
   },
+  Mutation: {
+    addEvent: async (_: any, { summary, start, end }: any, context: any) => {
+      try {
+        const event = {
+          summary,
+          start: {
+            dateTime: start,
+            timeZone: 'Asia/Kolkata',
+          },
+          end: {
+            dateTime: end,
+            timeZone: 'Asia/Kolkata',
+          },
+        };
+
+        const response = await calendar.events.insert({
+          calendarId: 'primary',
+          requestBody: event,
+        });
+
+        console.log("Response for AddEvent : ", response)
+        return formatGoogleCalendarEvent(response.data);
+      } catch (error) {
+        console.error("Error adding event: ", error);
+        throw new Error("Failed to add event");
+      }
+    },
+    // Other mutation resolvers...
+  },
 };
 
+//Implement the logic to format the raw event data into the GraphQL type Extract and format individual fields from the raw data 
+
+const formatGoogleCalendarEvent = (rawEventData:any) => {
+  return {
+    id: rawEventData.id,
+    summary: rawEventData.summary,
+    description: rawEventData.description,
+    start: rawEventData.start.dateTime,
+    end: rawEventData.end.dateTime,
+    // Add other fields as needed 
+  };
+};

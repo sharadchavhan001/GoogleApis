@@ -20,21 +20,10 @@ export const login = async (req: FastifyRequest, res: FastifyReply): Promise<voi
 };
 
 export const callback = async (req: any, res: any): Promise<void> => {
-    // try {
-        
-    //     // handle callback logic
-    //     res.send({ msg: 'Callback logic executed successfully' });
-    // } catch (error) {
-    //     console.error('Error processing callback:', error);
-    //     res.status(500).send({ error: 'Failed to process callback' });
-    // }
-
-
     console.log("Inside of fastify get -> /callback");
 
     const code = req.query.code;
     console.log("code -> " + code);
-
 
     try {
         const { tokens } = await oauth2Client.getToken(code);
