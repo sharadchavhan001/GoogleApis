@@ -62,5 +62,5 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'sdc-0001'
     appType: 'webAppLinux'
-    WebAppName: 'sdc-proj-0001'
+    WebAppName: 'project1'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
