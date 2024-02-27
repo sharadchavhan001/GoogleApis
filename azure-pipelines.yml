@@ -60,7 +60,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'hope will run smmothly'
+    azureSubscription: 'sdc-0001'
     appType: 'webAppLinux'
-    WebAppName: 'first-app'
+    WebAppName: 'sdc-proj-0001'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
